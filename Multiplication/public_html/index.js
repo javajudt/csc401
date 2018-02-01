@@ -10,22 +10,22 @@ function getRange(){
 }
 
 function buildTable(low, high){
-    var table = "<table><tr><td></td>";
+    var table = "<table><caption>Multiplication Table</caption><tbody><tr><th></th>";
     
     for (var i = low; i <= high; i++){
-        table += "<td>" + i + "</td>";
+        table += "<th>" + i + "</th>";
     }
     table += "</tr>";
     
     for (i = low; i <= high; i++){
-        table += "<tr><td>"+i+"</td>";
+        table += "<tr><th>"+i+"</th>";
         for (var j = low; j <= high; j++){
             table += "<td>"+(j*i)+"</td>";
         }
         table += "</tr>";
     }
     
-    table += "</table>";
+    table += "</tbody></table>";
     
     document.writeln(table);
 }
