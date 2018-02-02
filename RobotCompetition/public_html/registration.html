@@ -7,42 +7,61 @@
     </head>
     <body>
         <div id="main">
-            <div id="header"></div>
-            <div id="nav"></div>
-            <div id="sidebar"></div>
+            <div id="header">
+                <h1>1st Annual Timbuktu Robotics Competition</h1>
+                <p>February 30, 2034</p>
+                <p></p>
+            </div>
+            <div id="nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rules.html">Rules</a></li>
+                    <li>Register</li>
+                </ul>
+            </div>
+            <div id="sidebar">
+                Special thanks to our sponsors!
+                <ul>
+                    <li>Starla's Gears</li>
+                    <li>Zubaz</li>
+                    <li>Tupperware</li>
+                    <li>American Friends Society</li>
+                </ul>
+            </div>
             <div id="content">
+                <h2>Registration</h2>
                 <p>Please fill out this form to register for the competition. 
                     All fields are required unless specified.</p>
                 <form id="reg-form">
                     <p>
-                        <label>Team Name</label>
+                        Team Name<br />
                         <input type="text" name="tname" required="required" />
                     </p>
                     <p>
-                        <label>High School</label>
+                        High School<br />
                         <input type="text" name="hsname" required="required" />
                     </p>
                     <fieldset>
                         <legend>Team Members</legend>
                         <p>
-                            <label>Captain</label>
+                            Captain<br />
                             <input type="text" name="captain" required="required" />
                         </p>
                         <p>
-                            <label>Member 1</label>
+                            Member 1<br />
                             <input type="text" name="mem1" required="required" />
                         </p>
                         <p>
-                            <label>Member 2</label>
+                            Member 2<br />
                             <input type="text" name="mem2" required="required" />
                         </p>
                     </fieldset>
                     <p>
-                        <label>Street Address</label>
+                        Street Address<br />
                         <input type="text" name="address" required="required" />
                     </p>
                     <p>
-                        <label>City</label>
+                        City<br />
                         <input type="text" name="city" required="required" />
                     </p>
                     <p>
@@ -102,32 +121,39 @@
                         </select>
                     </p>
                     <p>
-                        <label>Phone (Optional)</label>
+                        Phone (Optional)<br />
                         <input type="tel" name="phone" />
                     </p>
                     <fieldset>
                         <legend>Events</legend>
                         <p>
-                            <label>Sprint</label>
-                            <input type="checkbox" name="sprint" />
+                            <input type="checkbox" name="sprint" /> Sprint
                         </p>
                         <p>
-                            <label>Battle</label>
-                            <input type="checkbox" name="battle" />
+                            <input type="checkbox" name="battle" /> Battle
                         </p>
                         <p>
-                            <label>Maze</label>
-                            <input type="checkbox" name="maze" />
+                            <input type="checkbox" name="maze" /> Maze
                         </p>
                     </fieldset>
                     <p>
-                        <label>Comment</label><br />
+                        Comments<br />
                         <textarea name="comment" required="required"></textarea>
                     </p>
                     <input type="submit" name="submit" />
                 </form>
             </div>
-            <div id="footer"></div>
+            <div id="footer">
+                <div id="address">
+                    <p>&copy; 2018 Timbuktu High School</p>
+                    <p>1 High School Drive</p>
+                    <p>Timbuktu</p>
+                </div>
+                <div id="contact">
+                    <p>robotics@tps.org</p>
+                    <p>555-7294</p>
+                </div>
+            </div>
         </div>
     </body>
 </html>
