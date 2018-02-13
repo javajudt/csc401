@@ -12,16 +12,16 @@
             <p>February 30, 2034</p>
             <p>In partnership with the University of South Dakota - Apply Today! </p>
         </div>
+        <div id="nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rules.html">Rules</a></li>
+                <li class="selected">Register</li>
+            </ul>
+        </div>
         <div id="main">
-            <div id="nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="rules.html">Rules</a></li>
-                    <li class="selected">Register</li>
-                </ul>
-            </div>
             <div id="sidebar">
-                Special thanks to our sponsors!
+                <p>Special thanks to our sponsors!</p>
                 <ul>
                     <li>Starla's Gears</li>
                     <li>Zubaz</li>
@@ -36,37 +36,37 @@
                 <form id="reg-form" method="POST" action="nosuchthing.php">
                     <p>
                         Team Name<br />
-                        <input type="text" name="tname" required="required" />
+                        <input class="required" type="text" name="tname" required="required" />
                     </p>
                     <p>
                         High School<br />
-                        <input type="text" name="hsname" required="required" />
+                        <input class="required" type="text" name="hsname" required="required" />
                     </p>
-                    <fieldset>
+                    <fieldset class="required">
                         <legend>Team Members</legend>
                         <p>
                             Captain<br />
-                            <input type="text" name="captain" required="required" />
+                            <input class="required" type="text" name="captain" required="required" />
                         </p>
                         <p>
                             Member 1<br />
-                            <input type="text" name="mem1" required="required" />
+                            <input type="text" name="mem1" />
                         </p>
                         <p>
                             Member 2<br />
-                            <input type="text" name="mem2" required="required" />
+                            <input type="text" name="mem2" />
                         </p>
                     </fieldset>
                     <p>
                         Street Address<br />
-                        <input type="text" name="address" required="required" />
+                        <input class="required" type="text" name="address" required="required" />
                     </p>
                     <p>
                         City<br />
-                        <input type="text" name="city" required="required" />
+                        <input class="required" type="text" name="city" required="required" />
                     </p>
                     <p>
-                        <select name="state" required="required">
+                        <select class="required" name="state" required="required">
                             <option selected="selected" disabled="disabled" value="">State</option>
                             <option value="AK">AK</option>
                             <option value="AL">AL</option>
@@ -125,7 +125,7 @@
                         Phone (Optional)<br />
                         <input type="tel" name="phone" />
                     </p>
-                    <fieldset>
+                    <fieldset class="required">
                         <legend>Events</legend>
                         <p>
                             <input type="checkbox" name="sprint" /> Sprint
@@ -138,8 +138,8 @@
                         </p>
                     </fieldset>
                     <p>
-                        Comments<br />
-                        <textarea name="comment" required="required"></textarea>
+                        Comments (Optional)<br />
+                        <textarea name="comment"></textarea>
                     </p>
                     <input type="submit" name="submit" />
                 </form>
