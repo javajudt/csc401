@@ -4,23 +4,26 @@
         <title>Register | Timbuktu Robotics Competition</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
+        <div id="nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rules.html">Rules</a></li>
+                <li class="selected">Register</li>
+            </ul>
+        </div>
+        <div id="header">
+            <h1>1st Annual Timbuktu Robotics Competition</h1>
+            <p>February 30, 2034</p>
+            <p>
+                <img src="sd.png" alt="USD Logo" title="The University of South Dakota" /> In partnership with the University of South Dakota - <a href="http://www.usd.edu/admissions/apply" target="_blank">Apply Today!</a>
+            </p>
+        </div>
         <div id="main">
-            <div id="header">
-                <h1>1st Annual Timbuktu Robotics Competition</h1>
-                <p>February 30, 2034</p>
-                <p>In partnership with the University of South Dakota - Apply Today! </p>
-            </div>
-            <div id="nav">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="rules.html">Rules</a></li>
-                    <li>Register</li>
-                </ul>
-            </div>
             <div id="sidebar">
-                Special thanks to our sponsors!
+                <p>Special thanks to our sponsors!</p>
                 <ul>
                     <li>Starla's Gears</li>
                     <li>Zubaz</li>
@@ -32,40 +35,40 @@
                 <h2>Registration</h2>
                 <p>Please fill out this form to register for the competition. 
                     All fields are required unless specified.</p>
-                <form id="reg-form">
+                <form id="reg-form" method="POST" action="nosuchthing.php">
                     <p>
                         Team Name<br />
-                        <input type="text" name="tname" required="required" />
+                        <input class="required" type="text" name="tname" required="required" />
                     </p>
                     <p>
                         High School<br />
-                        <input type="text" name="hsname" required="required" />
+                        <input class="required" type="text" name="hsname" required="required" />
                     </p>
-                    <fieldset>
+                    <fieldset class="required">
                         <legend>Team Members</legend>
                         <p>
                             Captain<br />
-                            <input type="text" name="captain" required="required" />
+                            <input class="required" type="text" name="captain" required="required" />
                         </p>
                         <p>
                             Member 1<br />
-                            <input type="text" name="mem1" required="required" />
+                            <input type="text" name="mem1" />
                         </p>
                         <p>
                             Member 2<br />
-                            <input type="text" name="mem2" required="required" />
+                            <input type="text" name="mem2" />
                         </p>
                     </fieldset>
                     <p>
                         Street Address<br />
-                        <input type="text" name="address" required="required" />
+                        <input class="required" type="text" name="address" required="required" />
                     </p>
                     <p>
                         City<br />
-                        <input type="text" name="city" required="required" />
+                        <input class="required" type="text" name="city" required="required" />
                     </p>
                     <p>
-                        <select name="state" required="required">
+                        <select class="required" name="state" required="required">
                             <option selected="selected" disabled="disabled" value="">State</option>
                             <option value="AK">AK</option>
                             <option value="AL">AL</option>
@@ -124,7 +127,7 @@
                         Phone (Optional)<br />
                         <input type="tel" name="phone" />
                     </p>
-                    <fieldset>
+                    <fieldset class="required">
                         <legend>Events</legend>
                         <p>
                             <input type="checkbox" name="sprint" /> Sprint
@@ -137,22 +140,22 @@
                         </p>
                     </fieldset>
                     <p>
-                        Comments<br />
-                        <textarea name="comment" required="required"></textarea>
+                        Comments (Optional)<br />
+                        <textarea name="comment"></textarea>
                     </p>
                     <input type="submit" name="submit" />
                 </form>
             </div>
-            <div id="footer">
-                <div id="address">
-                    <p>&copy; 2018 Timbuktu High School</p>
-                    <p>1 High School Drive</p>
-                    <p>Timbuktu</p>
-                </div>
-                <div id="contact">
-                    <p>robotics@tps.org</p>
-                    <p>555-7294</p>
-                </div>
+        </div>
+        <div id="footer">
+            <div id="address">
+                <p>&copy; 2018 Timbuktu High School</p>
+                <p>1 High School Drive</p>
+                <p>Timbuktu</p>
+            </div>
+            <div id="contact">
+                <p>robotics@tps.org</p>
+                <p>555-7294</p>
             </div>
         </div>
     </body>
