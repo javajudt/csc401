@@ -6,11 +6,25 @@ body{
     text-align: center;
     background-color: greenyellow;
     margin: 4em 12.5% 0px;
-    padding:1em;
+    padding: 1em;
     overflow: auto;
 }
 
+#header img{
+    height: 25px;
+}
+
+#header a{
+    text-decoration: none;
+    color: red;
+}
+
+#header a:hover{
+    color: darkgreen;
+}
+
 #nav{
+    z-index: 1;
     position: fixed;
     top: 0;
     width: 74%;
@@ -20,7 +34,6 @@ body{
 #nav ul{
     background-color: green;
     text-align: center;
-    z-index: 1;
     overflow: auto;
     list-style: none;
     padding: 0px;
@@ -35,8 +48,12 @@ body{
 
 #nav li a{
     display: block;
-    color:lightgreen;
+    color: lightgreen;
     text-decoration: none;
+}
+
+#nav li a:hover{
+    background-color: darkgreen;
 }
 
 .selected{
@@ -44,15 +61,11 @@ body{
     background-color: lightgreen;
 }
 
-#nav li a:hover{
-    background-color: darkgreen;
-}
-
 #main{
     margin: 0 12.5%;
     padding: 1em 0em 2em 3em;
     overflow: auto;
-    position:relative;
+    position: relative;
 }
 
 #footer{
@@ -68,30 +81,32 @@ body{
 }
 
 #address{
-    display:inline-block;
+    display: inline-block;
 }
 
 #contact{
-    display:inline-block;
+    display: inline-block;
 }
  
 #content{
-    width:75%;
+    width: 75%;
+    overflow: auto;
 }
 
 #sidebar{
-    background-color:skyblue;
-    float:right;
+    background-color: skyblue;
+    float: right;
     border: 1px solid cadetblue;
     border-radius: 10px;
     padding: 10px;
     text-align: center;
     height: 90%;
     width: 20%;
-    position:absolute;
+    position: absolute;
     right: 0;
     font-family: sans-serif;
     color: darkblue;
+    overflow: auto;
 }
 
 #sidebar p{
@@ -109,4 +124,12 @@ body{
 
 .required{
     border-color: red;
+}
+
+#reg-form input[type="text"], select, fieldset, textarea{
+    width: 175px;
+}
+
+#reg-form fieldset input[type="text"]{
+    width: 95%;
 }
