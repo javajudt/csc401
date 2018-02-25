@@ -1,0 +1,21 @@
+body{
+    font-size: 2em;
+}
+
+td{
+    padding: 5px;
+    text-align: center;
+}
+
+.target{
+    color: red;
+}
+
+.player{
+    color: blue;
+    font-weight: bold;
+}
+
+.nocrate{
+    color: lightgray;
+}
