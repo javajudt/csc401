@@ -19,3 +19,11 @@ td{
 .nocrate{
     color: lightgray;
 }
+
+.start{
+    background-color: yellow;
+}
+
+.complete{
+    color: lightgray;
+}
