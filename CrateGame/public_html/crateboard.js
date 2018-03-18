@@ -1,5 +1,9 @@
 "use strict";
 
+var Game = function(){
+    
+};
+
 var board = new Board();
 window.onload = function () {
     document.body.innerHTML = board;
