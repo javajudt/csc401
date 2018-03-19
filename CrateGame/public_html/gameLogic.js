@@ -8,21 +8,54 @@ function Game() {
     this.W = W;
 
     // Set object properties
-    this.size = getRandom(8, 12);
-    this.startPosition = new Point(getRandom(0, size - 1), size - 1);
-    this.playerPosition = new Point(this.startPosition.x, this.startPosition.y);
-    this.playerDirection = N;
-    this.crates = [];
-    this.score = 0;
-    this.levelComplete = false;
+    var size = getRandom(8, 12);
+    var startPosition = new Point(getRandom(0, size - 1), size - 1);
+    var playerPosition = new Point(startPosition.x, startPosition.y);
+    var targetPosition;
+    var playerDirection = N;
+    var crates = [];
+    var score = 0;
+    var levelComplete = false;
+    
+    this.getSize = function(){
+        return size;
+    };
+    
+    this.getStartPosition = function(){
+        return startPosition;
+    };
+    
+    this.getPlayerPosition = function(){
+        return playerPosition;
+    };
+    
+    this.getTargetPosition = function(){
+        return targetPosition;
+    };
+    
+    this.getPlayerDirection = function(){
+        return playerDirection;
+    };
+    
+    this.getCrates = function(){
+        return crates;
+    };
+    
+    this.getScore = function(){
+        return score;
+    };
+    
+    this.getLevelComplete = function(){
+        return levelComplete;
+    };
 
     // Generate crates
     for (var j = 0; j < size; j++) {
         var row = [];
         for (var i = 0; i < size; i++) {
             var crate = getRandom(0, 99);
-            if (crate < 60 || // 60% chance no crate, and don't put a crate on top of the player (weight = 0)
-                    (i === this.playerPosition.x && j === this.playerPosition.y))
+            // 60% chance no crate, and don't put a crate on top of the player (weight = 0)
+            if (crate < 60 || playerPosition.equals(new Point(i, j)))
                 crate = 0;
             else if (crate < 80) // 20% chance weight=1
                 crate = 1;
@@ -33,15 +66,15 @@ function Game() {
 
             row.push(crate);
         }
-        this.crates.push(row);
+        crates.push(row);
     }
 
     // Set target crate
-    while (!this.targetPosition) {
-        var tx = getRandom(1, this.size - 2); // Not on edge of board
-        var ty = getRandom(1, this.size - 2);
-        if (this.crates[ty][tx] !== 0)
-            this.targetPosition = new Point(tx, ty);
+    while (!targetPosition) {
+        var tx = getRandom(1, size - 2); // Not on edge of board
+        var ty = getRandom(1, size - 2);
+        if (crates[ty][tx] !== 0)
+            targetPosition = new Point(tx, ty);
     }
 
     // Changes the player direction to the direction specified.
@@ -50,74 +83,54 @@ function Game() {
     this.trySetDirection = function (direction) {
         if (direction !== N && direction !== E && direction !== S && direction !== W)
             console.log("Invalid direction in gameLogic.Game.trySetDirection");
-        else if (this.playerDirection === direction)
+        else if (playerDirection === direction)
             return false;
         else {
             // additional point for rotating 180 degrees
-            if ((this.playerDirection === N && direction === S) ||
-                    (this.playerDirection === E && direction === W) ||
-                    (this.playerDirection === S && direction === N) ||
-                    (this.playerDirection === W && direction === E))
-                this.score++;
+            if ((playerDirection === N && direction === S) ||
+                    (playerDirection === E && direction === W) ||
+                    (playerDirection === S && direction === N) ||
+                    (playerDirection === W && direction === E))
+                score++;
 
-            this.score++;
-            this.playerDirection = direction;
+            score++;
+            playerDirection = direction;
             return true;
         }
     };
 
     // Moves the player forward 1 block in the facing direction.
     this.move = function () {
-        if (!tryMove(this.playerPosition, 0))
+        if (!tryMove(playerPosition, 0))
             return;
 
-        if (this.playerDirection === N)
-            this.playerPosition.moveNorth();
-        else if (this.playerDirection === E)
-            this.playerPosition.moveEast();
-        else if (this.playerDirection === S)
-            this.playerPosition.moveSouth();
-        else if (this.playerDirection === W)
-            this.playerPosition.moveWest();
+        if (playerDirection === N)
+            playerPosition.moveNorth();
+        else if (playerDirection === E)
+            playerPosition.moveEast();
+        else if (playerDirection === S)
+            playerPosition.moveSouth();
+        else if (playerDirection === W)
+            playerPosition.moveWest();
 
-        this.score++;
+        score++;
 
         // Level complete when the target reaches the start
-        if (this.targetPosition.equals(this.startPosition))
-            this.levelComplete = true;
+        if (targetPosition.equals(startPosition))
+            levelComplete = true;
     };
 
     // Blows up the crate immediately in front of the player, if any.
     this.blowUp = function () {
-        var crate = getPositionInFront(this.playerPosition);
-        if (!isOutOfBounds(crate) &&
-                (this.crates[crate.y][crate.x] !== 0) &&
-                (!crate.equals(this.targetPosition))) {
-            this.crates[crate.y][crate.x] = 0;
-            this.score += 100;
+        var crate = playerPosition.getPointInFront(playerDirection);
+        if (!crate.isOutOfBounds() &&
+                (crates[crate.y][crate.x] !== 0) &&
+                (!crate.equals(targetPosition))) {
+            crates[crate.y][crate.x] = 0;
+            score += 100;
         }
     };
-
-    // Returns true if the specified position is out of bounds of the board.
-    // Returns false otherwise.
-    function isOutOfBounds(point) {
-        return (point.x < 0 || point.y < 0 || point.x >= this.size || point.y >= this.size);
-    }
-
-    // Returns the coordinates directly in front of the specified coordinates.
-    function getPositionInFront(point) {
-        if (this.playerDirection === N)
-            point.moveNorth();
-        else if (this.playerDirection === E)
-            point.moveEast();
-        else if (this.playerDirection === S)
-            point.moveSouth();
-        else if (this.playerDirection === W)
-            point.moveWest();
-
-        return point;
-    }
-
+    
     // Returns true if it is possible to move forward.
     // Returns false when the player trys to move off of the board
     // or trys to move too much weight.
@@ -125,17 +138,17 @@ function Game() {
         if (totalWeight > 3)
             return false;
 
-        var crate = getPositionInFront(point);
-        if (isOutOfBounds(crate))
+        var crate = point.getPointInFront(playerDirection);
+        if (crate.isOutOfBounds())
             return false;
 
-        var crateInFrontVal = this.crates[crate.y][crate.x];
+        var crateInFrontVal = crates[crate.y][crate.x];
         if (crateInFrontVal === 0 || tryMove(crate, totalWeight + crateInFrontVal)) {
-            if (point.equals(this.targetPosition)) // move target crate
-                this.targetPosition = crate;
+            if (point.equals(targetPosition)) // move target crate
+                targetPosition = crate;
 
-            this.crates[crate.y][crate.x] = this.crates[point.y][point.x];
-            this.crates[point.y][point.x] = 0;
+            crates[crate.y][crate.x] = crates[point.y][point.x];
+            crates[point.y][point.x] = 0;
             return true;
         }
     }
@@ -172,18 +185,39 @@ function Game() {
         this.equals = function (point) {
             return (this.x === point.x) && (this.y === point.y);
         };
+
+        // Returns the Point directly in front of this Point, based on the player's facing direction.
+        this.getPointInFront = function (direction) {
+            var point = new Point(this.x, this.y);
+            if (direction === N)
+                point.moveNorth();
+            else if (direction === E)
+                point.moveEast();
+            else if (direction === S)
+                point.moveSouth();
+            else if (direction === W)
+                point.moveWest();
+
+            return point;
+        };
+
+        // Returns true if the specified position is out of bounds of the board.
+        // Returns false otherwise.
+        this.isOutOfBounds = function () {
+            return (this.x < 0 || this.y < 0 || this.x >= size || this.y >= size);
+        };
     }
 
-/*
-    // Possibly use this
-    function Crate(point, weight, isTarget) {
-        this.point = point;
-        this.weight = weight;
-
-        // Parameter isTarget is optional, so check if it's falsey
-        if (!isTarget)
-            this.isTarget = false;
-        else
-            this.isTarget = isTarget;
-    }*/
+    /*
+     // Possibly use this
+     function Crate(point, weight, isTarget) {
+     this.point = point;
+     this.weight = weight;
+     
+     // Parameter isTarget is optional, so check if it's falsey
+     if (!isTarget)
+     this.isTarget = false;
+     else
+     this.isTarget = isTarget;
+     }*/
 }

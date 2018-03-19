@@ -4,6 +4,8 @@ window.onload = function () {
     var game = new Game();
     var board = new Board(game);
 
+    board.draw();
+
     window.onkeydown = function (ev) {
         if (!game.levelComplete) {
             if (ev.key === 'w' || ev.key === 'W' || ev.key === 'ArrowUp') {
@@ -21,6 +23,8 @@ window.onload = function () {
             } else if (ev.key === ' ') {
                 game.blowUp();
             }
+            
+            board.draw();
         }
     };
 };
