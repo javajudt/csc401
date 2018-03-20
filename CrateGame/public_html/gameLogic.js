@@ -1,3 +1,5 @@
+// Script for manipulating game properties
+
 "use strict";
 
 function Game() {
@@ -207,17 +209,4 @@ function Game() {
             return (this.x < 0 || this.y < 0 || this.x >= size || this.y >= size);
         };
     }
-
-    /*
-     // Possibly use this
-     function Crate(point, weight, isTarget) {
-     this.point = point;
-     this.weight = weight;
-     
-     // Parameter isTarget is optional, so check if it's falsey
-     if (!isTarget)
-     this.isTarget = false;
-     else
-     this.isTarget = isTarget;
-     }*/
 }

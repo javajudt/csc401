@@ -1,13 +1,16 @@
+// Main driver script
+
 "use strict";
 
 window.onload = function () {
     var game = new Game();
     var board = new Board(game);
-
-    board.draw();
+    var header = document.getElementById("header");
+    
+    draw();
 
     window.onkeydown = function (ev) {
-        if (!game.levelComplete) {
+        if (!game.getLevelComplete()) {
             if (ev.key === 'w' || ev.key === 'W' || ev.key === 'ArrowUp') {
                 if (!game.trySetDirection(game.N))
                     game.move();
@@ -23,8 +26,18 @@ window.onload = function () {
             } else if (ev.key === ' ') {
                 game.blowUp();
             }
-            
-            board.draw();
+
+            draw();
         }
     };
+
+    // Redraw board when the window size changes
+    window.onresize = draw;
+
+    function draw() {
+        board.draw();
+        header.innerText = "Score: " + game.getScore();
+        if (game.getLevelComplete())
+            header.innerText += " | Level Complete!";
+    }
 };
