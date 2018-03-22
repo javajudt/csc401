@@ -7,11 +7,21 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Cool Database Stuff</title>
+        <?php
+        require "dbHelper.php";
+        
+        ?>
     </head>
     <body>
         <?php
-        echo "Hello world";
+
+        getPuzzles();
+        
+        
+        print $out;
+
+        disconnect();
         ?>
     </body>
 </html>
