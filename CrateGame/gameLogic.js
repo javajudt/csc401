@@ -162,6 +162,15 @@ function Game() {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+    
+    function seededRandom (seed){   //[0 - 1.0)  optional seeding     
+        if(!seed) seed = Math.random();
+        
+        seed = (seed*9301 + 49297) % 233280;
+        var rand = seed/233280;
+        if(rand >= 1) rand = .99999;  //maybe rounding error?
+        return rand;
+    }
 
     // Point object for storing x and y values.
     function Point(x, y) {
