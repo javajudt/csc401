@@ -26,3 +26,6 @@ hs_err_pid*
 /PhpProject1/nbproject/private/
 /Canvas/nbproject/private/
 /UniServerZ
+
+# Shortcut files
+*.lnk
