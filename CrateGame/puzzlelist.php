@@ -24,7 +24,7 @@
         
         while ($result = mysqli_fetch_assoc($query)) {
             print <<<ENDLI
-<tr class='clickable-row' onclick="window.location='crateGame.html?id={$result["seedlev"]}';">
+<tr class='clickable-row' onclick="window.location='crategame.php?id={$result["seedlev"]}';">
     <td>
         <p>{$result["puzname"]}</p>
         <p class='td-sub'>Discovered by {$result["name"]}</p>
