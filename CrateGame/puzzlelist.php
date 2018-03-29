@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Puzzles | Jordan's Crate Game</title>
-        <link rel="stylesheet" href="crateGame.css" />
+        <link rel="stylesheet" href="crategame.css" />
         <?php
         require "dblogin.php";
         ?>
