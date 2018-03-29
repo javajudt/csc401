@@ -10,8 +10,8 @@
     </head>
     <body>
         <table>
-            <th>Puzzle Name</th>
-            <th>Record Score</th>
+            <th class='big'>Puzzle Name</th>
+            <th class='big'>Record Score</th>
         <?php
         if (!$connection = mysqli_connect($db_host, $db_user, $db_password, $db_name))
             die("Could not connect to database: " . mysqli_connect_error());
@@ -26,11 +26,11 @@
             print <<<ENDLI
 <tr class='clickable-row' onclick="window.location='crategame.php?id={$result["seedlev"]}';">
     <td>
-        <p>{$result["puzname"]}</p>
+        <p class='big'>{$result["puzname"]}</p>
         <p class='td-sub'>Discovered by {$result["name"]}</p>
     </td>
     <td>
-        <p>{$result["score"]}</p>
+        <p class='big'>{$result["score"]}</p>
         <p class='td-sub'>By {$result["recname"]}</p>
     </td>
 </tr>

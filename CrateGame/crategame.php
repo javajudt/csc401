@@ -10,7 +10,7 @@
         <script src="graphics.js"></script>
     </head>
     <body>
-        <div id="header"></div>
+        <div id="header" class='big'></div>
         <div id="game">
             <canvas id="canvas"></canvas>
         </div>

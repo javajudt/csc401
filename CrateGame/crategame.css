@@ -1,7 +1,3 @@
-body{
-    font-size: 2em;
-}
-
 table{
     margin: auto;
 }
@@ -23,6 +19,15 @@ td p{
     margin: .25em;
 }
 
+input{
+    display: block;
+    margin-bottom: 1em;
+}
+
+.big{
+    font-size: 2em;
+}
+
 .clickable-row:hover{
     background-color: #ffff99;
     color: #ff3300;
@@ -30,6 +35,5 @@ td p{
 }
 
 .td-sub{
-    font-size: .5em;
     color: silver;
 }
