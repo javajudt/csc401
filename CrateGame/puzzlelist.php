@@ -16,10 +16,7 @@
         if (!$connection = mysqli_connect($db_host, $db_user, $db_password, $db_name))
             die("Could not connect to database: " . mysqli_connect_error());
 
-        if (!$connection || !isset($connection))
-            die("Could not get puzzles: not connected");
-
-        if (!$query = mysqli_query($connection, "SELECT * FROM puzzles"))
+        if (!$query = mysqli_query($connection, "SELECT * FROM $puzzle_table"))
             die("Could not get puzzles: " . mysqli_error($connection));
         
         while ($result = mysqli_fetch_assoc($query)) {
