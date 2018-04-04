@@ -45,3 +45,43 @@ input.error{
 label.error{
     color: red;
 }
+
+#navbar ul{
+    background-color: #e2351b;
+    text-align: center;
+    overflow: auto;
+    list-style: none;
+    padding: 0px;
+}
+
+#navbar li {
+    float: left;
+    width: 33.3%;
+    line-height: 2em;
+    font-size: 1.5em;
+}
+
+#navbar li a{
+    display: block;
+    color: #ffb24f;
+    text-decoration: none;
+}
+
+#navbar li a:hover{
+    background-color: #ffb24f;
+    color: #e2351b;
+}
+
+#navbar li a.selected:hover{
+    background-color: #e2351b;
+    color: #ffb24f;
+}
+
+li.selected{
+    font-weight: bold;
+    background-color: #ffb24f;
+}
+
+#navbar li a.selected{
+    color: #e2351b;
+}

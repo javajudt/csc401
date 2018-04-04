@@ -10,6 +10,14 @@
         <script src="graphics.js"></script>
     </head>
     <body>
+        <div id="navbar">
+            <ul>
+                <?php
+                require "navbar.php";
+                print printNavbar($_SERVER['PHP_SELF']);
+                ?>
+            </ul>
+        </div>
         <div id="header" class='big'></div>
         <div id="game">
             <canvas id="canvas"></canvas>

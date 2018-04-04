@@ -9,6 +9,14 @@
         ?>
     </head>
     <body>
+        <div id="navbar">
+            <ul>
+                <?php
+                require "navbar.php";
+                print printNavbar($_SERVER['PHP_SELF']);
+                ?>
+            </ul>
+        </div>
         <table>
             <th class='big'>Puzzle Name</th>
             <th class='big'>Record Score</th>
