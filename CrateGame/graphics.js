@@ -29,7 +29,7 @@ function Board(game) {
         }
 
         // Determine size of square canvas
-        var useableHeight = window.innerHeight - document.getElementById("header").offsetHeight - 25;
+        var useableHeight = window.innerHeight - document.getElementById("header").offsetHeight - document.getElementById("navbar").offsetHeight - 50;
         var useableWidth = window.innerWidth - 25;
         var canvasSize;
         if (useableWidth > useableHeight)

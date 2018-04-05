@@ -3,42 +3,47 @@
     <head>
         <meta charset="UTF-8">
         <title>Puzzles | Jordan's Crate Game</title>
-        <link rel="stylesheet" href="crateGame.css" />
+        <link rel="stylesheet" href="crategame.css" />
         <?php
         require "dblogin.php";
         ?>
     </head>
     <body>
+        <div id="navbar">
+            <ul>
+                <?php
+                require "navbar.php";
+                print printNavbar($_SERVER['PHP_SELF']);
+                ?>
+            </ul>
+        </div>
         <table>
-            <th>Puzzle Name</th>
-            <th>Record Score</th>
-        <?php
-        if (!$connection = mysqli_connect($db_host, $db_user, $db_password, $db_name))
-            die("Could not connect to database: " . mysqli_connect_error());
+            <th class='big'>Puzzle Name</th>
+            <th class='big'>Record Score</th>
+                <?php
+                if (!$connection = mysqli_connect($db_host, $db_user, $db_password, $db_name))
+                    die("Could not connect to database: " . mysqli_connect_error());
 
-        if (!$connection || !isset($connection))
-            die("Could not get puzzles: not connected");
+                if (!$query = mysqli_query($connection, "SELECT * FROM $puzzle_table"))
+                    die("Could not get puzzles: " . mysqli_error($connection));
 
-        if (!$query = mysqli_query($connection, "SELECT * FROM puzzles"))
-            die("Could not get puzzles: " . mysqli_error($connection));
-        
-        while ($result = mysqli_fetch_assoc($query)) {
-            print <<<ENDLI
-<tr class='clickable-row' onclick="window.location='crateGame.html?id={$result["seedlev"]}';">
+                while ($result = mysqli_fetch_assoc($query)) {
+                    print <<<ENDLI
+<tr class='clickable-row' onclick="window.location='crategame.php?id={$result["seedlev"]}';">
     <td>
-        <p>{$result["puzname"]}</p>
+        <p class='big'>{$result["puzname"]}</p>
         <p class='td-sub'>Discovered by {$result["name"]}</p>
     </td>
     <td>
-        <p>{$result["score"]}</p>
+        <p class='big'>{$result["score"]}</p>
         <p class='td-sub'>By {$result["recname"]}</p>
     </td>
 </tr>
 ENDLI;
-        }
+                }
 
-        mysqli_close($connection);
-        ?>
+                mysqli_close($connection);
+                ?>
         </table>
     </body>
 </html>
