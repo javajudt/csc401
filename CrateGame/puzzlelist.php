@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Puzzles | Jordan's Crate Game</title>
-        <link rel="stylesheet" href="crategame.css" />
-        <link rel="stylesheet" href="puzzlelist.css" />
+        <link rel="stylesheet" href="style/crategame.css" />
+        <link rel="stylesheet" href="style/puzzlelist.css" />
         <?php
         session_start();
         ?>

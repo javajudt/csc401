@@ -4,10 +4,10 @@
         <title>Jordan's Crate Game</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="crategame.css" />
-        <script src="crategame.js"></script>
-        <script src="gamelogic.js"></script>
-        <script src="graphics.js"></script>
+        <link rel="stylesheet" href="style/crategame.css" />
+        <script src="script/crategame.js"></script>
+        <script src="script/gamelogic.js"></script>
+        <script src="script/graphics.js"></script>
         <?php
         session_start();
         ?>

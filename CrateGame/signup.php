@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Sign Up | Jordan's Crate Game</title>
-        <link rel="stylesheet" href="crategame.css" />
-        <link rel="stylesheet" href="account_form.css" />
+        <link rel="stylesheet" href="style/crategame.css" />
+        <link rel="stylesheet" href="style/account_form.css" />
         <?php
         session_start();
         require "authenticate.php";
