@@ -4,6 +4,15 @@
         <meta charset="UTF-8">
         <title>Sign Up | Jordan's Crate Game</title>
         <link rel="stylesheet" href="crategame.css" />
+        <link rel="stylesheet" href="account_form.css" />
+        <?php
+        session_start();
+        require "authenticate.php";
+        if (challengeAuth()) {
+            print "<script type='text/javascript'>window.location = '" . $_SERVER['DOCUMENT_ROOT'] . "/puzzlelist.php'</script>";
+            die();
+        }
+        ?>
     </head>
     <body>
         <div id="navbar">
@@ -17,44 +26,36 @@
         <div id="signup">
             <p>Sign up using the form below to take advantage of all the awesome privileges that accompany being registered! All fields are required.</p>
             <?php
-            $name = htmlentities(trim($_POST['name']));
-            $email = htmlentities(trim($_POST['email']));
-            $password = htmlentities($_POST['password']);
-            $confirm = htmlentities($_POST['confirm']);
-
             if (count($_POST) > 0) {
-                if (strlen($name) === 0)
+                $name = htmlentities(trim($_POST['name']));
+                $email = htmlentities(trim($_POST['email']));
+                $password = htmlentities($_POST['password']);
+                $confirm = htmlentities($_POST['confirm']);
+
+                if (strlen($name) === 0) {
                     $err['name'] = true;
-                if (strlen($email) === 0)
+                }if (strlen($email) === 0) {
                     $err['email'] = true;
-                if (strlen($password) === 0)
+                }if (strlen($password) === 0) {
                     $err['password'] = true;
-                if ($password !== $confirm || strlen($confirm) === 0)
+                }if ($password !== $confirm || strlen($confirm) === 0) {
                     $err['confirm'] = true;
-                if ($password !== $confirm)
+                }if ($password !== $confirm) {
                     $confirm_err = true;
-
+                }
                 if (!isset($err)) {
-                    require "dblogin.php";
-                    if (!$connection = mysqli_connect($db_host, $db_user, $db_password, $db_name))
-                        die("Could not connect to database: " . mysqli_connect_error());
+                    //Check if the email is already registered
+                    require "DbHelper.php";
+                    if (DbHelper::checkUserExists($email)) {
+                        $err['email'] = true;
+                        $dup = true;
+                    } else {
+                        $password = md5($password);
+                        DbHelper::registerUser($name, $password, $email);
 
-                    mysqli_real_escape_string($connection, $name);
-                    mysqli_real_escape_string($connection, $email);
-                    mysqli_real_escape_string($connection, $password);
-
-                    $password = md5($password);
-                    if (!$query = mysqli_query($connection, "INSERT INTO "
-                            . "$users_table(tag,password,email) "
-                            . "VALUES('$name','$password','$email')")) {
-                        if (strpos(mysqli_error($connection), "Duplicate") === 0) {
-                            $err['email'] = true;
-                            $dup = true;
-                        } else
-                            die("Could not add user: " . mysqli_error($connection));
+                        //Login the new user
+                        tryAuth($email, $password);
                     }
-
-                    mysqli_close($connection);
                 }
             }
 
