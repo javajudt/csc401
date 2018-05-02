@@ -8,6 +8,9 @@
         <script src="crategame.js"></script>
         <script src="gamelogic.js"></script>
         <script src="graphics.js"></script>
+        <?php
+        session_start();
+        ?>
     </head>
     <body>
         <div id="navbar">

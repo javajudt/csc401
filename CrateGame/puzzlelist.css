@@ -1,0 +1,30 @@
+table{
+    margin: auto;
+}
+
+table, th, td{
+    border: 1px solid black;
+}
+
+th, td{
+    padding: 10px 20px;
+    text-align: center;
+}
+
+td{
+    color:orange;
+}
+
+td p{
+    margin: .25em;
+}
+
+.clickable-row:hover{
+    background-color: #ffff99;
+    color: #ff3300;
+    cursor: pointer;
+}
+
+.td-sub{
+    color: silver;
+}

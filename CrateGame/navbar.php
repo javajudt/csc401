@@ -7,9 +7,18 @@
  * @return type Returns the navbar HTML string.
  */
 function printNavbar($calling_page) {
-    $pages['crategame'] = "Play";
+    session_start();
+    $pages['crategame'] = "Random Puzzle";
     $pages['puzzlelist'] = "Puzzle List";
-    $pages['signup'] = "Sign Up";
+    
+    require_once "authenticate.php";
+    if (challengeAuth()){
+        $pages['logout'] = "Welcome, {$_SESSION['tag']}! (Logout)";
+    }
+    else{
+        $pages['signup'] = "Sign Up";
+        $pages['login'] = "Login";
+    }
 
     $nav = "";
     foreach ($pages as $key => $page) {

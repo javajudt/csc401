@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <title>Puzzles | Jordan's Crate Game</title>
         <link rel="stylesheet" href="crategame.css" />
+        <link rel="stylesheet" href="puzzlelist.css" />
         <?php
-        require "dblogin.php";
+        session_start();
         ?>
     </head>
     <body>
@@ -21,28 +22,22 @@
             <th class='big'>Puzzle Name</th>
             <th class='big'>Record Score</th>
                 <?php
-                if (!$connection = mysqli_connect($db_host, $db_user, $db_password, $db_name))
-                    die("Could not connect to database: " . mysqli_connect_error());
-
-                if (!$query = mysqli_query($connection, "SELECT * FROM $puzzle_table"))
-                    die("Could not get puzzles: " . mysqli_error($connection));
-
-                while ($result = mysqli_fetch_assoc($query)) {
+                require "DbHelper.php";
+                $puzzles = DbHelper::getAllPuzzles();
+                for($i = 0; $i < count($puzzles); $i++){
                     print <<<ENDLI
-<tr class='clickable-row' onclick="window.location='crategame.php?id={$result["seedlev"]}';">
+<tr class='clickable-row' onclick="window.location='crategame.php?id={$puzzles[$i]["seedlev"]}';">
     <td>
-        <p class='big'>{$result["puzname"]}</p>
-        <p class='td-sub'>Discovered by {$result["name"]}</p>
+        <p class='big'>{$puzzles[$i]["puzname"]}</p>
+        <p class='td-sub'>Discovered by {$puzzles[$i]["name"]}</p>
     </td>
     <td>
-        <p class='big'>{$result["score"]}</p>
-        <p class='td-sub'>By {$result["recname"]}</p>
+        <p class='big'>{$puzzles[$i]["score"]}</p>
+        <p class='td-sub'>By {$puzzles[$i]["recname"]}</p>
     </td>
 </tr>
 ENDLI;
                 }
-
-                mysqli_close($connection);
                 ?>
         </table>
     </body>
