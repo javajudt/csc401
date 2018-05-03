@@ -21,7 +21,15 @@
                 ?>
             </ul>
         </div>
-        <div id="header" class='big'></div>
+        <div id="header" class='big'>
+            <?php
+            // Get and display record score, if any
+            require "DbHelper.php";
+            print "&nbsp;| ";
+            $rec = DbHelper::getRecordScore($_GET['id']);
+            print ($rec === "UNSOLVED" ? "" : "Record: ") . $rec;
+            ?>
+        </div>
         <div id="game">
             <canvas id="canvas"></canvas>
         </div>

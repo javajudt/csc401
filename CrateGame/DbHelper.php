@@ -44,8 +44,8 @@ class DbHelper {
             die("Could not get user: " . mysqli_error(self::$connection));
         }
 
-        $result = mysqli_fetch_row($query);
         self::disconnect();
+        $result = mysqli_fetch_row($query);
         if ($result[0] === 1) {
             return true;
         } else {
@@ -68,9 +68,9 @@ class DbHelper {
         if (!$query = mysqli_query(self::$connection, $sql)) {
             die("Could not get user: " . mysqli_error(self::$connection));
         }
-        
+
         self::disconnect();
-        if (mysqli_num_rows($query) !== 1){
+        if (mysqli_num_rows($query) !== 1) {
             return false;
         }
         $result = mysqli_fetch_assoc($query);
@@ -83,20 +83,44 @@ class DbHelper {
      */
     public static function getAllPuzzles() {
         self::connect();
-        
+
         $sql = "SELECT * FROM " . self::$table_name_puzzles;
-        if (!$query = mysqli_query(self::$connection, $sql)){
+        if (!$query = mysqli_query(self::$connection, $sql)) {
             die("Could not get puzzles: " . mysqli_error(self::$connection));
-        }
-        $result = mysqli_fetch_assoc($query);
-        $data = array();
-        for($i = 0; $result; $i++){
-            $data[$i] = $result;
-            $result = mysqli_fetch_assoc($query);
         }
         
         self::disconnect();
+        $result = mysqli_fetch_assoc($query);
+        $data = array();
+        for ($i = 0; $result; $i++) {
+            $data[$i] = $result;
+            $result = mysqli_fetch_assoc($query);
+        }
+
         return $data;
+    }
+
+    public static function getRecordScore($puzId) {
+        if (!$puzId) {
+            return "UNSOLVED";
+        }
+
+        self::connect();
+        $puzId = mysqli_real_escape_string(self::$connection, $puzId);
+
+        $sql = "SELECT score FROM " . self::$table_name_puzzles . " WHERE seedlev=" . $puzId;
+        if (!$query = mysqli_query(self::$connection, $sql)) {
+            die("Could not get puzzles: " . mysqli_error(self::$connection));
+        }
+
+        self::disconnect();
+
+        if (mysqli_num_rows($query) != 1) {
+            return "UNSOLVED";
+        }
+
+        $result = mysqli_fetch_row($query);
+        return $result[0];
     }
 
     public static function savePuzzle($puzId, $puzName, $discoverName, $recordName, $recordScore) {
@@ -106,7 +130,7 @@ class DbHelper {
         $discoverName = mysqli_real_escape_string(self::$connection, $discoverName);
         $recordName = mysqli_real_escape_string(self::$connection, $recordName);
         $recordScore = mysqli_real_escape_string(self::$connection, $recordScore);
-        
+
         self::disconnect();
     }
 
@@ -115,7 +139,7 @@ class DbHelper {
         $puzId = mysqli_real_escape_string(self::$connection, $puzId);
         $recordName = mysqli_real_escape_string(self::$connection, $recordName);
         $recordScore = mysqli_real_escape_string(self::$connection, $recordScore);
-        
+
         self::disconnect();
     }
 
@@ -131,5 +155,4 @@ class DbHelper {
             self::$connection = null;
         }
     }
-
 }

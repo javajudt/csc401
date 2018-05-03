@@ -18,7 +18,9 @@ window.onload = function () {
 
     var game = new Game(findGetParameter("id"));
     var board = new Board(game);
+    
     var header = document.getElementById("header");
+    var recordStr = header.innerText;
 
     draw();
 
@@ -49,8 +51,10 @@ window.onload = function () {
 
     function draw() {
         board.draw();
-        header.innerText = "Score: " + game.getScore();
-        if (game.getLevelComplete())
-            header.innerText += " | Level Complete!";
+
+        var scoreStr = "Score: " + game.getScore();
+        var completeStr = game.getLevelComplete() ? " | Level Complete!" : "";
+
+        header.innerText = scoreStr + completeStr + recordStr;
     }
 };
