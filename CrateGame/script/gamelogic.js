@@ -2,7 +2,7 @@
 
 "use strict";
 
-function Game() {
+function Game(seed) {
     const N = 0, E = 1, S = 2, W = 3;
     this.N = N;
     this.E = E;
@@ -160,10 +160,10 @@ function Game() {
     function getRandom(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+        return Math.floor(seededRandom() * (max - min + 1)) + min;
     }
     
-    function seededRandom (seed){   //[0 - 1.0)  optional seeding     
+    function seededRandom(){   //[0 - 1.0)  optional seeding     
         if(!seed) seed = Math.random();
         
         seed = (seed*9301 + 49297) % 233280;
