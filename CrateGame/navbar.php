@@ -8,14 +8,13 @@
  */
 function printNavbar($calling_page) {
     session_start();
-    $pages['crategame'] = "Random Puzzle";
+    $pages['crategame'] = "Play";
     $pages['puzzlelist'] = "Puzzle List";
-    
+
     require_once "authenticate.php";
-    if (challengeAuth()){
+    if (challengeAuth()) {
         $pages['logout'] = "Welcome, {$_SESSION['tag']}! (Logout)";
-    }
-    else{
+    } else {
         $pages['signup'] = "Sign Up";
         $pages['login'] = "Login";
     }
@@ -23,13 +22,9 @@ function printNavbar($calling_page) {
     $nav = "";
     foreach ($pages as $key => $page) {
         $selected = strpos($calling_page, $key);
-        $nav .= "<li class='";
-        if ($selected)
-            $nav .= "selected";
-        $nav .= "'><a class='";
-        if ($selected)
-            $nav .= "selected";
-        $nav .= "' href='$key.php'>$page</a></li>";
+        $nav .= "<li class='" . ($selected ? "selected" : "") . "'><a class='" . ($selected ? "selected" : "");
+        // Set tab link. If crategame, choose random int for id.
+        $nav .= "' href='$key.php" . ($key === "crategame" ? ("?id=" . rand()) : "") . "'>$page</a></li>";
     }
     return $nav;
 }

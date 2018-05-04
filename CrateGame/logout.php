@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="style/crategame.css" />
+        <link rel="stylesheet" href="style/sitewide.css" />
         <link rel="stylesheet" href="style/account_form.css" />
         <title></title>
         <?php

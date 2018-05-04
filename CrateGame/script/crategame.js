@@ -16,11 +16,27 @@ window.onload = function () {
         return result;
     }
 
-    var game = new Game(findGetParameter("id"));
+    var id = findGetParameter("id");
+    var record = "just a sec...";
+    updateRecord();
+    var isLoggedIn = false;
+    $.ajax({
+        url: "is_user_logged_in.php",
+        method: "GET"
+    }).done(function (data) {
+        console.log("User logged in: " + data);
+        isLoggedIn = (data === "true");
+    });
+
+// This is a horrible way to do this because anybody could
+// put whatever score they want.
+    var score = findGetParameter("score");
+    if (score) {
+        saveScore(id, score);
+    }
+
+    var game = new Game(id);
     var board = new Board(game);
-    
-    var header = document.getElementById("header");
-    var recordStr = header.innerText;
 
     draw();
 
@@ -52,9 +68,50 @@ window.onload = function () {
     function draw() {
         board.draw();
 
-        var scoreStr = "Score: " + game.getScore();
-        var completeStr = game.getLevelComplete() ? " | Level Complete!" : "";
+        var score = game.getScore();
+        var gameOver = game.getLevelComplete();
 
+        var scoreStr = "Score: " + score;
+        var completeStr = gameOver ? " | Level Complete!" : "";
+        var recordStr = " | Record: " + record;
+
+        var header = document.getElementById("header");
         header.innerText = scoreStr + completeStr + recordStr;
+
+        if (gameOver && (record === "UNSOLVED" || score < record)) {
+            console.log("Showing save button");
+            $("#save").show();
+        }
+    }
+
+    function updateRecord() {
+        $.ajax({
+            url: "get_high_score.php",
+            method: "GET",
+            data: {puzId: id}
+        }).done(function (data) {
+            record = data;
+            draw();
+            console.log("record updated: " + record);
+        });
+    }
+
+    $("#save_button").click(function () {
+        if (isLoggedIn) {
+            saveScore(id, game.getScore());
+        } else {
+            window.location.href = "./login.php?id=" + id + "&score=" + game.getScore();
+        }
+    });
+
+    function saveScore(id, score) {
+        $.ajax({
+            url: "save_new_record.php",
+            method: "POST",
+            data: {puzId: id, recordScore: score}
+        }).done(function () {
+            $("#save").html("Your high score has been saved!");
+            updateRecord();
+        });
     }
 };

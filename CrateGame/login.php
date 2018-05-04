@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Login | Jordan's Crate Game</title>
-        <link rel="stylesheet" href="style/crategame.css" />
+        <link rel="stylesheet" href="style/sitewide.css" />
         <link rel="stylesheet" href="style/account_form.css" />
         <?php
         session_start();
@@ -45,7 +45,12 @@
                     print "<p id='incorrect'>Email or password is incorrect.</p>";
                 }
                 ?>
-                <form action="<?php print $_SERVER['PHP_SELF']; ?>" method="POST">
+                <form action="<?php 
+                print $_SERVER['PHP_SELF']; 
+                if (isset($_GET['id']) && isset($_GET['score'])){
+                    print "?id={$_GET['id']}&score={$_GET['score']}";
+                }
+                ?>" method="POST">
                     <label class='<?php if ($err['email']) print 'error'; ?>' for='email'>Email</label>
                     <input class='text-input <?php if ($err['email']) print 'error'; ?>' type='email' name='email' value='<?php print $email; ?>' />
 
@@ -55,6 +60,9 @@
                     <input type='submit' />
                 </form>
                 <?php
+            } else if (isset($_GET['id']) && isset($_GET['score'])) {
+                print "<script>window.location.replace('./crategame.php?id={$_GET['id']}&score={$_GET['score']}')</script>";
+                die();
             } else {
                 print "<p>Welcome, {$_SESSION['tag']}!</p>";
                 ?>
